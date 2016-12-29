@@ -7,20 +7,87 @@
     <!-- copyright © 2016 jaak -->
     <meta name="theme-color" content="#0097A7">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-
-  
     <link href="./home/style.min.css" rel="stylesheet" type="text/css">
     <link href="./home/font-awesome.min.css" rel="stylesheet" type="text/css">
- 
-    
     <script>
     window.console = window.console || function(t) {};
     </script>
     <script src="./home/jquery-2.2.0.min.js"></script>
+    <script src="./home/typed.js"></script>
     <script src="./home/page.js"></script>
     <script src="./home/SmoothScroll.js"></script>
     <!-- particles.js  -->
     <script src="./home/particles.min.js"></script>
+    <script>
+    $(function() {
+        $(".element").typed({
+            strings: [`<tt>
+            namespace nature;<br>
+class Person {<br>
+    
+    private $name; /* 姓名 */<br>
+    
+    private $age; /* 年龄 */<br>
+    
+    private $skills = []; /* 技能 */<br>
+
+    function __construct(){}<br>
+    private function __clone(){} /* heihei 不让你克隆 */<br>
+
+    /* @return mixed */<br>
+    public function getName(){<br>
+        return $this->name;<br>
+    }<br>
+
+    /* @param mixed $name */<br>
+    public function setName($name){<br>
+        $this->name = $name;<br>
+    }<br>
+
+    /*@return mixed */<br>
+    public function getAge(){<br>
+        return $this->age;<br>
+    }<br>
+
+    /* @param mixed $age */<br>
+    public function setAge($age){<br>
+        $this->age = $age;<br>
+    }<br>
+
+
+    /**<br>
+     * @param $skill<br>
+     * @return $this<br>
+     */<br>
+    public function addSkill($skill){<br>
+        if (trim($skill)!='') {<br>
+           array_push($this->skills,$skill);<br>
+        }<br>
+        return $this;<br>
+    }<br>
+
+}<br>
+$boy = new Person();<br>
+$boy->setName('zhangyake');<br>
+$boy->setAge(25);<br>
+$boy->addSkill('php')<br>
+    ->addSkill('node.js')<br>
+    ->addSkill('java')<br>
+    ->addSkill('mysql')<br>
+    ->addSkill('mongodb')<br>
+    ->addSkill('...')<br>
+    ->addSkill('.....') ;<br>
+  // .... <br>
+  // .... ... <br>
+;
+            </tt>`],
+            typeSpeed: 1,
+            backDelay: 100,
+            loop: true,
+            contentType: 'html'
+        });
+    });
+    </script>
     <!-- Piwik -->
     <style>
     @font-face {
@@ -29,16 +96,59 @@
         font-weight: normal;
         font-style: normal;
     }
+    
+    .typed-cursor {
+        opacity: 1;
+        -webkit-animation: blink 0.7s infinite;
+        -moz-animation: blink 0.7s infinite;
+        animation: blink 0.7s infinite;
+    }
+    
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    @-webkit-keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    @-moz-keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
     </style>
 </head>
 
 <body>
-    <div>
-        <img class="background" src="./home/imgmountains-glowriver.jpg" >
+<audio src="http://112.65.117.169/m10.music.126.net/20161229122050/a9758fcba7a682af75b612a7af20d55e/ymusic/cfd7/0695/4992/1c73422c532681cdddd13f34bdb601aa.mp3"></audio>
+    <div class="element">
     </div>
     <!-- particles.js container -->
     <div id="particles-js">
-        <canvas class="particles-js-canvas-el"  style="width: 100%; height: 100%;"></canvas>
+        <canvas class="particles-js-canvas-el" style="width: 100%; height: 100%;"></canvas>
     </div>
     <script>
     /* ---- particles.js config ---- */
@@ -154,18 +264,21 @@
     });
     </script>
     <div class="main">
-        <!--			<div class="down-sign"><i class="fa fa-angle-down fa-5x" aria-hidden="true"></i></div>-->
+        <!--            <div class="down-sign"><i class="fa fa-angle-down fa-5x" aria-hidden="true"></i></div>-->
         <div class="db" style="min-height: 937px;">
             <div class="inner">
-                <p class="hello">你好 我是 <span class="name">Jaak</span></p>
-                <p class="meet">欢迎来到码农 开垦的一片田</p>
+                <!--    <p class="hello">你好 我是 <span class="name">Jaak</span></p>
+                <p class="meet">欢迎来到码农 开垦的一片田</p> -->
+                <li class="visit-li">
+                    
+                </li>
                 <li class="visit-li">
                     <p class="visit-li-title"><a href="http://zhangyake.me/" target="_blank">My Blog</a></p>
                     <p class="visit-li-descript">一只伪全栈码农的个人博客</p>
                 </li>
             </div>
         </div>
-      <!--   <div class="db" style="min-height: 937px;">
+        <!--   <div class="db" style="min-height: 937px;">
           <div class="inner">
               <p class="dbtitle">Maybe</p>
               <p class="dbsubtitlecn">你想要访问:</p>
@@ -367,7 +480,7 @@
     </div>
     <footer id="footer">
         <div>
-          copyright © 2016 jaak 
+            copyright © 2016 jaak
         </div>
     </footer>
 </body>
