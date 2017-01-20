@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Heart</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <canvas id="c" style="display: block;margin: 50px auto;"></canvas>
+    <script>
+    var WINDOW_WIDTH = 1024;
+    var WINDOW_HEIGHT = 768;
+    var digit = [
+        [
+            [0, 0, 1, 1, 1, 0, 0],
+            [0, 1, 1, 0, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 0, 1, 1, 0],
+            [0, 0, 1, 1, 1, 0, 0]
+        ], //0
+        [
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 1, 1, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1]
+        ], //1
+        [
+            [0, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1]
+        ], //2
+        [
+            [1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0]
+        ], //3
+        [
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 1, 0],
+            [0, 0, 1, 1, 1, 1, 0],
+            [0, 1, 1, 0, 1, 1, 0],
+            [1, 1, 0, 0, 1, 1, 0],
+            [1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 1, 1]
+        ], //4
+        [
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0]
+        ], //5
+        [
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 0, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0]
+        ], //6
+        [
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0]
+        ], //7
+        [
+            [0, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 0]
+        ], //8
+        [
+            [0, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0],
+            [0, 1, 1, 0, 0, 0, 0]
+        ], //9
+        [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ] //:
+    ];
+    var R = 8;
+    var balls = [];
+    var colors = ['#1fe', '#e00', '#ee0', '#FF5062'];
+    const endTime = new Date(2017, 0, 24, 19, 16, 30);
+    var curShowTimeSeconds = 0;
+
+    function getCurShowTimeSeconds() {
+        var ret = endTime.getTime() - (new Date()).getTime();
+        ret = Math.round(ret / 1000);
+        return ret > 0 ? ret : 0;
+    }
+
+    function addBalls(x, y, num) {
+        for (var i = 0; i < digit[num].length; i++) {
+            for (var j = 0; j < digit[num][i].length; j++) {
+                if (digit[num][i][j] == 1) {
+                    var aball = {
+                        x: x + j * 2 * (R + 1) + R + 1,
+                        y: y + i * 2 * (R + 1) + R + 1,
+                        g: 1.5 + Math.random(),
+                        vx: Math.pow(-1, parseInt(Math.random() * 10)) * 5,
+                        vy: -10,
+                        color: colors[parseInt(Math.random() * colors.length)]
+                    }
+
+                    balls.push(aball);
+                }
+            }
+
+        }
+
+
+    }
+
+    /* function draw(point, cvs) {
+         var n = 8;
+         cvs.beginPath();
+         for (var i = 0; i < point.p.length; i++) {
+             if (i == 0) {
+                 cvs.moveTo(point.p[i].x * n, point.p[i].y * n);
+             } else {
+                 cvs.lineTo(point.p[i].x * n, point.p[i].y * n);
+             }
+             if (i == point.p.length - 1) {
+                 cvs.lineTo(point.p[i].x * n, point.p[i].y * n);
+             }
+
+         }
+         cvs.closePath();
+         cvs.fillStyle = point.color;
+         cvs.fill();
+     }*/
+
+    function update() {
+        var nextShowTimeSeconds = getCurShowTimeSeconds();
+
+        var nextHours = parseInt(nextShowTimeSeconds / 3600);
+        var nextMinutes = parseInt((nextShowTimeSeconds - nextHours * 3600) / 60);
+        var nextSeconds = nextShowTimeSeconds % 60;
+
+        var curHours = parseInt(curShowTimeSeconds / 3600);
+        var curMinutes = parseInt((curShowTimeSeconds - curHours * 3600) / 60);
+        var curSeconds = curShowTimeSeconds % 60;
+        if (nextSeconds != curSeconds) {
+            curShowTimeSeconds = nextShowTimeSeconds;
+            if (parseInt(curHours / 10) != parseInt(nextHours / 10)) {
+                addBalls((R + 1) * 0, 0, parseInt(nextHours / 10));
+            }
+            if (parseInt(curHours % 10) != parseInt(nextHours % 10)) {
+                addBalls((R + 1) * 15, 0, parseInt(nextHours % 10));
+            }
+            if (parseInt(curMinutes / 10) != parseInt(nextMinutes / 10)) {
+                addBalls((R + 1) * 39, 0, parseInt(nextMinutes / 10));
+            }
+            if (parseInt(curMinutes % 10) != parseInt(nextMinutes % 10)) {
+                addBalls((R + 1) * 54, 0, parseInt(nextMinutes % 10));
+            }
+            if (parseInt(curSeconds / 10) != parseInt(nextSeconds / 10)) {
+                addBalls((R + 1) * 78, 0, parseInt(nextSeconds / 10));
+            }
+            if (parseInt(curSeconds % 10) != parseInt(nextSeconds % 10)) {
+                addBalls((R + 1) * 93, 0, parseInt(nextSeconds % 10));
+            }
+
+        }
+        updateBalls();
+    }
+
+    function updateBalls() {
+        for (var i = 0; i < balls.length; i++) {
+            balls[i].x += balls[i].vx;
+            balls[i].y += balls[i].vy;
+            balls[i].vy += balls[i].g;
+            if (balls[i].y >= WINDOW_HEIGHT - R) {
+                balls[i].y = WINDOW_HEIGHT - R;
+                balls[i].vy = -balls[i].vy * 0.5;
+            }
+        }
+        var cnt = 0;
+        for (var i = 0; i < balls.length; i++) {
+
+            if (balls[i].x + R >= 0 && balls[i].x - R < WINDOW_WIDTH) {
+
+                balls[cnt++] = balls[i];
+            }
+
+        }
+        while (balls.length > Math.min(300,cnt)) {
+            balls.pop();
+        }
+
+    }
+    window.onload = function() {
+        var canvas = document.getElementsByTagName('canvas')[0];
+        /*  var points = [{
+              p: [{
+                  x: 10,
+                  y: 10
+              }, {
+                  x: 50,
+                  y: 50
+              }, {
+                  x: 90,
+                  y: 10
+              }],
+              color: '#CBF162'
+          },{
+              p: [{
+                  x: 10,
+                  y: 10
+              }, {
+                  x: 50,
+                  y: 50
+              }, {
+                  x: 10,
+                  y: 90
+              }],
+              color: '#5EB6D0'
+          },{
+              p: [{
+                  x: 50,
+                  y: 50
+              }, {
+                  x: 70,
+                  y: 30
+              }, {
+                  x: 70,
+                  y: 70
+              }],
+              color: '#ff0'
+          },{
+              p: [{
+                  x: 50,
+                  y: 50
+              }, {
+                  x: 70,
+                  y: 70
+              }, {
+                  x: 50,
+                  y: 90
+              }, {
+                  x: 30,
+                  y: 70
+              }],
+              color: '#A79AC3'
+          }, {
+              p: [{
+                  x: 50,
+                  y: 90
+              }, {
+                  x: 30,
+                  y: 70
+              },{
+                  x: 10,
+                  y: 90
+              }],
+              color: '#FE9CCE'
+          },{
+              p: [{
+                  x: 90,
+                  y: 10
+              }, {
+                  x: 90,
+                  y: 50
+              }, {
+                  x: 70,
+                  y: 70
+              }, {
+                  x: 70,
+                  y: 30
+              }],
+              color: '#FF5062'
+          },{
+              p: [{
+                  x: 90,
+                  y: 50
+              }, {
+                  x: 90,
+                  y: 90
+              }, {
+                  x: 50,
+                  y: 90
+              }],
+              color: '#FCC520'
+          }, ];*/
+        canvas.width = WINDOW_WIDTH;
+        canvas.height = WINDOW_HEIGHT;
+        var ctx = canvas.getContext('2d');
+        if (ctx) {
+
+            // for (var i = 0; i < points.length; i++) {
+
+            //   draw(points[i],ctx);
+            //   ctx.stroke();
+            // }
+            // for (var i = 1; i < 40; i++) {
+            //   ctx.beginPath();
+            //   ctx.lineWidth = 2;
+            //   ctx.strokeStyle = '#e11';
+            //   ctx.arc(100*i, 100, 50,i, 1.5*Math.PI, false);
+            //   // ctx.closePath();
+            //   ctx.stroke();
+            // }
+
+            setInterval(
+                function() {
+                    render(ctx);
+                    update();
+                }, 100
+            );
+
+
+            /*ctx.moveTo(100, 100);
+            ctx.lineTo(700, 700);
+            ctx.lineTo(100, 700);
+            ctx.lineTo(100, 100);
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = '#00f';
+            ctx.fillStyle = '#0f0';
+            ctx.stroke();
+
+            ctx.fill();*/
+        } else {
+            alert('該瀏覽器，不支持canvas');
+        }
+    }
+
+    function render(ctx) {
+        ctx.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)
+        var hours = parseInt(curShowTimeSeconds / 3600);
+        var minutes = parseInt((curShowTimeSeconds - hours * 3600) / 60);
+        var seconds = curShowTimeSeconds % 60;
+
+        renderDigit(0, 0, parseInt(hours / 10), ctx);
+        renderDigit((R + 1) * 15, 0, parseInt(hours % 10), ctx);
+        renderDigit((R + 1) * 30, 0, 10, ctx);
+
+        renderDigit((R + 1) * 39, 0, parseInt(minutes / 10), ctx);
+        renderDigit((R + 1) * 54, 0, parseInt(minutes % 10), ctx);
+
+        renderDigit((R + 1) * 69, 0, 10, ctx);
+
+        renderDigit((R + 1) * 78, 0, parseInt(seconds / 10), ctx);
+        renderDigit((R + 1) * 93, 0, parseInt(seconds % 10), ctx);
+
+        for (var i = 0; i < balls.length; i++) {
+            ctx.fillStyle = balls[i].color;
+            ctx.beginPath();
+            ctx.arc(balls[i].x, balls[i].y, R, 0, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+        }
+    }
+
+    function renderDigit(x, y, num, ctx) {
+
+        ctx.fillStyle = 'rgb(0,102,153)';
+        for (var i = 0; i < digit[num].length; i++) {
+            for (var j = 0; j < digit[num][i].length; j++) {
+                if (digit[num][i][j] == 1) {
+                    ctx.beginPath();
+                    ctx.arc(x + j * 2 * (R + 1) + R + 1, y + i * 2 * (R + 1) + R + 1, R, 0, 2 * Math.PI, false);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            }
+
+        }
+    }
+    </script>
+    <script>
+    </script>
+</body>
+
+</html>
