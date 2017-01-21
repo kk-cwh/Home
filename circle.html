@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>canvas 随机圆</title>
+    <meta charset="UTF-8">
+    <style>
+    html,
+    body {
+        margin: 0px;
+        height: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="c" style="height: 100%;"></canvas>
+    <script>
+    var WINDOW_WIDTH = 1024;
+    var WINDOW_HEIGHT = 768;
+    var MARGIN_LEFT = 60;
+    var MARGIN_TOP = 30;
+
+    window.onload = function() {
+        WINDOW_WIDTH = document.body.clientWidth
+        WINDOW_HEIGHT = document.body.clientHeight
+        // console.log(WINDOW_WIDTH, WINDOW_HEIGHT);
+        // R = Math.round(WINDOW_WIDTH * 4 / 5 / 108) - 1;
+        // MARGIN_LEFT = Math.round(WINDOW_WIDTH / 10);;
+        // MARGIN_TOP = WINDOW_HEIGHT / 5;
+        var canvas = document.getElementsByTagName('canvas')[0];
+        var colors = ['#FFD8E3', '#B0FFD0', '#FFF6CF', '#BEFFEB','#FA988D'];
+        canvas.width = WINDOW_WIDTH;
+        canvas.height = WINDOW_HEIGHT;
+        var ctx = canvas.getContext('2d');
+        if (ctx) {
+          setInterval(function() {
+              ctx.clearRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT)
+                for (var i = 0; i < 40; i++) {
+                    render(parseInt(Math.random() * WINDOW_WIDTH),
+                        parseInt(Math.random() * WINDOW_HEIGHT),
+                        parseInt(Math.random() * WINDOW_WIDTH * 0.08),
+                        colors[parseInt(Math.random() * colors.length)], ctx);
+                }
+            }, 2000)
+
+
+
+        } else {
+            alert('該瀏覽器，不支持canvas');
+        }
+    }
+
+
+
+    function render(x, y, r, color, ctx) {
+        ctx.beginPath()
+        ctx.fillStyle = color;
+        ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+        ctx.closePath;
+        ctx.fill();
+    }
+    </script>
+</body>
+
+</html>
