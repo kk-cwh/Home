@@ -52,7 +52,7 @@
                 var location = x + ',' + y;
 
                 var locationstr = wgs84togcj02[0] + ',' + wgs84togcj02[1];
-                let url = 'http://restapi.amap.com/v3/geocode/regeo'
+                let url = 'https://restapi.amap.com/v3/geocode/regeo'
                 let key = 'e5aab0a759f5dcd02b55f4f576fd3495'
                 axios.get(url, { params: { 'location': locationstr, 'key': key } }).then(function(response) {
                     var address = response.data['regeocode']['formatted_address'];
