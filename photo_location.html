@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="./home/exif.js"></script>
+    <script type="text/javascript" src="../home/index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="form-group" style="margin-top: 20%;margin-left: 25%;">
+        <h4>上传原图获取位置信息</h4>
+        <input id="file-input" type="file" />
+        <br/>
+        <img src="" height="200" width="200" alt="Image preview..." class="img-rounded" />
+        <br/>
+    </div>
+    <div style="margin: 0 auto;">
+        <a id='address' href=""></a>
+    </div>
+    <script>
+    function previewFile() {
+        var preview = document.querySelector('img');
+        var file = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            preview.src = reader.result;
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+    document.getElementById("file-input").onchange = function(e) {
+        previewFile();
+        EXIF.getData(e.target.files[0], function() {
+
+            console.log(EXIF.getTag(this, 'DateTime'));
+            try {
+                let n = EXIF.getTag(this, 'GPSLatitude');
+                let lat = n[0] * 1 + n[1] / 60 + n[2] / 3600;
+                let e = EXIF.getTag(this, 'GPSLongitude');
+                let lng = e[0] * 1 + e[1] / 60 + e[2] / 3600;
+
+                var wgs84togcj02 = coordtransform.wgs84togcj02(lng, lat);
+                var x = parseFloat(wgs84togcj02[0].toFixed(6));
+                var y = parseFloat(wgs84togcj02[1].toFixed(6));
+
+                var location = x + ',' + y;
+
+                var locationstr = wgs84togcj02[0] + ',' + wgs84togcj02[1];
+                let url = 'http://restapi.amap.com/v3/geocode/regeo'
+                let key = 'e5aab0a759f5dcd02b55f4f576fd3495'
+                axios.get(url, { params: { 'location': locationstr, 'key': key } }).then(function(response) {
+                    var address = response.data['regeocode']['formatted_address'];
+                    console.log(address);
+                    document.getElementById('address').innerHTML = address;
+                    address = '在这里';
+                    let open_url = `http://restapi.amap.com/v3/staticmap?location=${location}&zoom=10&size=800*480&labels=${address},2,0,16,0xFFFFFF,0x008000:${location}&key=e5aab0a759f5dcd02b55f4f576fd3495&scale=2`;
+                    console.log(open_url);
+                    document.getElementById('address').href = open_url;
+                    // window.open(open_url);
+                });
+            } catch (e) {
+                document.getElementById('address').innerHTML = '无法获取位置信息';
+            }
+
+
+
+
+        });
+    }
+    </script>
+</body>
+
+</html>
