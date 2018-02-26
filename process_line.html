@@ -11,9 +11,9 @@
           console.log(document.readyState)
           var ele = document.getElementById('process-line');
        
-        //   if(document.readyState == 'complete'){
-        //     ele.style.width = '100%';
-        //   }
+          if(document.readyState == 'complete'){
+            ele.style.width = '100%';
+          }
         }
         
     </script>
@@ -36,7 +36,7 @@
 <body>
     <div class="process-line" id="process-line"></div>
     <div>
-        <img src="./images/www.tmall.com.png" alt="">
+        <!-- <img src="./images/www.tmall.com.png" alt=""> -->
         <script>
             document.getElementById('process-line').style.width = '30%';
         </script>
