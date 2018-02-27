@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>进度条</title>
+    <script>
+        document.onreadystatechange=function(){
+          console.log(document.readyState)
+          var ele = document.getElementById('process-line');
+       
+          if(document.readyState == 'complete'){
+            ele.style.width = '100%';
+          }
+        }
+        
+    </script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .process-line{
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #00f0ff;
+            height: 5px;
+            width: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="process-line" id="process-line"></div>
+    <div>
+        <!-- <img src="./images/www.tmall.com.png" alt=""> -->
+        <script>
+            document.getElementById('process-line').style.width = '30%';
+        </script>
+        <img src="./images/www.hao123.com.png" alt="">
+        <script>
+                document.getElementById('process-line').style.width = '50%';
+            </script>
+        <img src="./images/www.zhihu.com.png" alt="">
+        <script>
+                document.getElementById('process-line').style.width = '80%';
+            </script>
+        <!-- <img src="./images/www.taobao.com.png" alt=""> -->
+        <script>
+                document.getElementById('process-line').style.width = '90%';
+            </script>
+    </div>
+</body>
+
+</html>
