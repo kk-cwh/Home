@@ -32,8 +32,6 @@ body{
 }
 .warp{
     width: 1000px;
-
-    height: 50px;
     margin: 0 auto;
 }
 .logo{
@@ -42,6 +40,9 @@ body{
 }
 .logo-left{
     float: left;
+}
+.logo-left img{
+    height: 80px;
 }
 .logo-right{
     float: right;
@@ -52,7 +53,28 @@ body{
 .logo-right img{
     vertical-align: middle;
     margin-right: 5px;
+   
 }
 .logo-right span{
     color: #900;
+}
+.nav{
+/* background: #756c64; */
+border-radius: 3px;
+box-sizing: border-box;
+height: 40px;
+
+}
+ .nav-left{
+    width: 500px;
+    background: #900;
+    float: left;
+    
+}
+
+ .nav-right{
+    float: left; 
+    background: #f0f;
+    width: 400px;
+    height: 40px;
 }
