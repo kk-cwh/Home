@@ -42,7 +42,7 @@ body{
     float: left;
 }
 .logo-left img{
-    height: 80px;
+    display: block;
 }
 .logo-right{
     float: right;
@@ -71,10 +71,18 @@ height: 40px;
     float: left;
     
 }
-
+.nav-left ul li{
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 70px;
+    list-style-type: none;
+    margin-left: 10px;
+    text-align: center;
+}
  .nav-right{
     float: left; 
     background: #f0f;
-    width: 400px;
+    width: 500px;
     height: 40px;
 }
