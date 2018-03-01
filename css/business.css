@@ -59,7 +59,7 @@ body{
     color: #900;
 }
 .nav{
-/* background: #756c64; */
+background: #756c64;
 border-radius: 3px;
 box-sizing: border-box;
 height: 40px;
@@ -67,7 +67,7 @@ height: 40px;
 }
  .nav-left{
     width: 500px;
-    background: #900;
+    background: #756b68;
     float: left;
     
 }
@@ -79,10 +79,15 @@ height: 40px;
     list-style-type: none;
     margin-left: 10px;
     text-align: center;
+    color: #fff;
+
+}
+.nav-left ul li:hover{
+    color: #FF0;
 }
  .nav-right{
     float: left; 
-    background: #f0f;
+    /* background: #f0f; */
     width: 500px;
     height: 40px;
 }
