@@ -66,10 +66,10 @@ height: 40px;
 
 }
  .nav-left{
-    width: 640px;
+    width: 630px;
     background: #756b68;
     float: left;
-    
+    margin-left: 10px;
 }
 .nav-left ul li{
     float: left;
