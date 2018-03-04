@@ -66,7 +66,7 @@ height: 40px;
 
 }
  .nav-left{
-    width: 500px;
+    width: 640px;
     background: #756b68;
     float: left;
     
@@ -88,9 +88,18 @@ height: 40px;
  .nav-right{
     float: left; 
     /* background: #f0f; */
-    width: 500px;
+    width: 360px;
     height: 40px;
 }
 .nav-right .search{
-    height: 20px;
+    height: 25px;
+    width: 190px;
+    margin-top: 5px;
+    background: url(../images/imooc/search.jpg) no-repeat right center;
+    background-color: #fff;
+    padding-right:25px;
+    border: 1px solid #fff;
+}
+.ad{
+    height: 310px;
 }
