@@ -7,11 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>企业网站布局学习demo</title>
     <link rel="stylesheet" href="./css/business.css">
-    <script type="text/javascript" src="./js/myfocus-2.0.1.min.js"></script> 
+    <script type="text/javascript" src="./js/myfocus-2.0.1.min.js"></script>
     <!--引入myFocus库-->
     <script type="text/javascript" src="./js/mf-pattern/mF_fancy.js"></script>
     <!--引入风格js文件-->
-    <link href="./js/mf-pattern/mF_fancy.css" type="text/css" /> 
+    <link href="./js/mf-pattern/mF_fancy.css" type="text/css" />
+    <script type="text/javascript">
+        myFocus.set({ id: 'boxID' });
+    </script>
 </head>
 
 <body>
@@ -40,7 +43,7 @@
                 <span>400-881-8866</span>
             </div>
         </div>
-        
+
         <div class="nav">
             <div class="nav-left">
                 <ul>
@@ -58,6 +61,42 @@
                 </form>
             </div>
         </div>
+
+        <div id="boxID" class="ad">
+            <!--焦点图盒子-->
+            <div class="loading">
+                <img src="images/imooc/loading.gif" alt="请稍候..." />
+            </div>
+            <!--载入画面(可删除)-->
+            <div class="pic">
+                <!--内容列表(li数目可随意增减)-->
+                <ul>
+                    <li>
+                        <a href="#">
+                            <img src="images/imooc/ad2.jpg" thumb="" alt="标题1" text="详细描述1" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/imooc/ad3.jpg" thumb="" alt="标题2" text="详细描述2" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/imooc/ad4.jpg" thumb="" alt="标题3" text="详细描述3" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="news"></div>
+            <div class="course"></div>
+            <div class="sidebar"></div>
+        </div>
+
+
     </div>
 
 </body>

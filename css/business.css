@@ -66,10 +66,10 @@ height: 40px;
 
 }
  .nav-left{
-    width: 500px;
+    width: 630px;
     background: #756b68;
     float: left;
-    
+    margin-left: 10px;
 }
 .nav-left ul li{
     float: left;
@@ -88,9 +88,42 @@ height: 40px;
  .nav-right{
     float: left; 
     /* background: #f0f; */
-    width: 500px;
+    width: 360px;
     height: 40px;
 }
 .nav-right .search{
-    height: 20px;
+    height: 25px;
+    width: 190px;
+    margin-top: 5px;
+    background: url(../images/imooc/search.jpg) no-repeat right center;
+    background-color: #fff;
+    padding-right:25px;
+    border: 1px solid #fff;
+}
+.ad{
+    margin-top: 1px;
+    height: 310px;
+}
+.main{
+    height: 250px;
+    background: #fff;
+}
+.news,.course,.sidebar{
+    height: 250px;
+    float: left;
+}
+.news{
+width: 340px;
+border:1px solid #E8E8E8;
+background: #f0f;
+}
+.course{
+    width: 410px;
+    border: 1px solid #e8e8e8;
+    background: #00f;
+    margin: 0 7px;
+}
+.sidebar{
+    width: 230px;
+    background: #0ff;
 }
