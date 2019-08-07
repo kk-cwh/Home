@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>告白神器</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vant@2.0/lib/index.css"
+    />
+
+    <!-- 引入组件 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.0/lib/vant.min.js"></script>
+    <style>
+      .heart {
+        height: 200px;
+        width: 120px;
+        margin: 100px auto;
+        position: relative;
+        /* background-color: #f67; */
+        animation: xindong 2s infinite ease-in-out;
+      }
+
+      .heart::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        background-color: #f67;
+        border-radius: 60px 60px 0 0;
+        position: absolute;
+        right: 29px;
+        transform: rotate(-45deg);
+      }
+
+      .heart::after {
+        content: '';
+        height: 100%;
+        width: 100%;
+        background-color: #f67;
+        border-radius: 60px 60px 0 0;
+        position: absolute;
+        left: 29px;
+        transform: rotate(45deg);
+      }
+
+      @keyframes xindong {
+        0% {
+          transform: scale(0.2);
+        }
+        50% {
+          transform: scale(0.5);
+        }
+        100% {
+          transform: scale(0.2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="heart" v-show="show"></div>
+    </div>
+  </body>
+  <script>
+    var Vue = window.Vue
+    var vant = window.vant
+    // 注册组件
+    Vue.use(vant)
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          show: false
+        }
+      },
+      mounted() {
+        this.init()
+      },
+      methods: {
+        init() {
+          this.$dialog
+            .alert({
+              message: '小姐姐'
+            })
+            .then(() => {
+              this.$dialog
+                .alert({
+                  message: '呼叫小姐姐'
+                })
+                .then(() => {
+                  this.$dialog
+                    .confirm({
+                      message: '小姐姐有时间么？',
+                      cancelButtonText: '否',
+                      confirmButtonText: '是'
+                    })
+                    .then(() => {
+                      this.$dialog
+                        .alert({
+                          message: '耶...我问一个问题啊'
+                        })
+                        .then(() => {
+                          this.sameAct()
+                        })
+                    })
+                    .catch(() => {
+                      this.$dialog
+                        .alert({
+                          message: '哪...我就问一个问题啊'
+                        })
+                        .then(() => {
+                          this.sameAct()
+                        })
+                    })
+                })
+            })
+        },
+        sameAct() {
+          this.$dialog
+            .confirm({
+              message: '小姐姐，做我女朋友吧？',
+              cancelButtonText: '否',
+              confirmButtonText: '是'
+            })
+            .then(() => {
+              this.$dialog
+                .alert({
+                  message: '我就知道小姐姐会同意的'
+                })
+                .then(() => {
+                  this.show = true
+                })
+            })
+            .catch(() => {
+              this.$dialog
+                .confirm({
+                  message: '拒绝我后果很严重,要不要改变主意？',
+                  cancelButtonText: '否',
+                  confirmButtonText: '是'
+                })
+                .then(() => {
+                  this.$dialog
+                    .alert({
+                      message: '我就知道小姐姐会同意的'
+                    })
+                    .then(() => {
+                      this.show = true
+                    })
+                })
+                .catch(() => {
+                    this.$dialog
+                    .alert({
+                      message: '你的手机将会黑屏'
+                    })
+                    .then(() => {
+                      this.show = true
+                    })
+
+                })
+            })
+        }
+      }
+    })
+  </script>
+</html>
